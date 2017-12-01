@@ -494,7 +494,7 @@ std::size_t StarSchemaSimpleCostModel::getNumDistinctValues(
       return stat.getNumDistinctValues(rel_attr_id);
     }
   }
-  return estimateCardinalityForTableReference(table_reference) * 0.1;
+  return estimateCardinalityForTableReference(table_reference) * 0.5;
 }
 
 bool StarSchemaSimpleCostModel::impliesUniqueAttributes(
