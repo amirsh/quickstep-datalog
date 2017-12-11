@@ -177,6 +177,10 @@ add_library(quickstep_utility_Cast ../empty_src.cpp Cast.hpp)
 add_library(quickstep_utility_CheckSnprintf ../empty_src.cpp CheckSnprintf.hpp)
 add_library(quickstep_utility_ColumnVectorCache ../empty_src.cpp ColumnVectorCache.hpp)
 add_library(quickstep_utility_CompositeHash ../empty_src.cpp CompositeHash.hpp)
+add_library(quickstep_utility_BarrieredReadWriteConcurrentBitVector
+            ../empty_src.cpp
+            BarrieredReadWriteConcurrentBitVector.hpp)
+add_library(quickstep_utility_BlockIDStream ../empty_src.cpp BlockIDStream.hpp)
 add_library(quickstep_utility_DAG ../empty_src.cpp DAG.hpp)
 add_library(quickstep_utility_DisjointTreeForest ../empty_src.cpp DisjointTreeForest.hpp)
 add_library(quickstep_utility_EqualsAnyConstant ../empty_src.cpp EqualsAnyConstant.hpp)
@@ -256,6 +260,15 @@ target_link_libraries(quickstep_utility_CompositeHash
                       glog
                       quickstep_types_TypedValue
                       quickstep_utility_HashPair)
+target_link_libraries(quickstep_utility_BarrieredReadWriteConcurrentBitVector
+                      quickstep_utility_BitManipulation
+                      quickstep_utility_Macros)
+target_link_libraries(quickstep_utility_BlockIDStream
+                      quickstep_catalog_CatalogRelation
+                      quickstep_storage_StorageBlockInfo
+                      quickstep_utility_Macros)
+target_link_libraries(quickstep_utility_BulkIoConfiguration
+                      quickstep_utility_Macros)
 target_link_libraries(quickstep_utility_DAG
                       glog
                       quickstep_utility_Macros)
@@ -370,6 +383,7 @@ target_link_libraries(quickstep_utility
                       quickstep_utility_BarrieredReadWriteConcurrentBitVector
                       quickstep_utility_BitManipulation
                       quickstep_utility_BitVector
+                      quickstep_utility_BlockIDStream
                       quickstep_utility_BloomFilter
                       quickstep_utility_BloomFilter_proto
                       quickstep_utility_BulkIoConfiguration

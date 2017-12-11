@@ -89,6 +89,7 @@ class ParseSubqueryExpression;
 class ParseSubqueryTableReference;
 class ParseTableReference;
 class ParseTableReferenceSignature;
+class ParseTransitiveClosureTableReference;
 class ParseWindow;
 class Type;
 class UnaryOperation;
@@ -189,6 +190,7 @@ unsigned_numeric_literal {exact_numeric_literal}|{approximate_numeric_literal}
   "character"        return TOKEN_CHARACTER;
   "check"            return TOKEN_CHECK;
   "column"           return TOKEN_COLUMN;
+  "connect"          return TOKEN_CONNECT;
   "constraint"       return TOKEN_CONSTRAINT;
   "copy"             return TOKEN_COPY;
   "create"           return TOKEN_CREATE;

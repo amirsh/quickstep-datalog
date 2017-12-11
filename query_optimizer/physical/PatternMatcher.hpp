@@ -46,6 +46,7 @@ class SharedSubplanReference;
 class Sort;
 class TableReference;
 class TopLevelPlan;
+class TransitiveClosure;
 class UnionAll;
 class UpdateTable;
 
@@ -130,6 +131,7 @@ using SomeSharedSubplanReference = SomePhysicalNode<SharedSubplanReference, Phys
 using SomeSort = SomePhysicalNode<Sort, PhysicalType::kSort>;
 using SomeTableReference = SomePhysicalNode<TableReference, PhysicalType::kTableReference>;
 using SomeTopLevelPlan = SomePhysicalNode<TopLevelPlan, PhysicalType::kTopLevelPlan>;
+using SomeTransitiveClosure = SomePhysicalNode<TransitiveClosure, PhysicalType::kTransitiveClosure>;
 using SomeUnionAll = SomePhysicalNode<UnionAll, PhysicalType::kUnionAll>;
 using SomeUpdateTable = SomePhysicalNode<UpdateTable, PhysicalType::kUpdateTable>;
 
