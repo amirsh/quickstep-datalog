@@ -43,7 +43,7 @@ namespace optimizer {
 /**
  * @brief Rule that applies to a physical plan to transform HashJoin nodes into
  *        FilterJoin nodes.
- * 
+ *
  * This is an optimization that strength-reduces HashJoins to FilterJoins
  * (implemented as LIPFilters attached to some anchoring operators where the
  * filters get applied). Briefly speaking, the idea is that in the case that

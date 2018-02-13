@@ -471,7 +471,8 @@ double StarSchemaSimpleCostModel::estimateSelectivityForPredicate(
            E::SomeScalarLiteral::Matches(comparison_expression->left()))) {
         for (const auto &child : physical_plan->children()) {
           if (E::ContainsExprId(child->getOutputAttributes(), attr->id())) {
-            const std::size_t child_num_distinct_values = estimateNumDistinctValues(attr->id(), child);
+            const std::size_t child_num_distinct_values =
+                estimateNumDistinctValues(attr->id(), child);
             if (comparison_expression->isEqualityComparisonPredicate()) {
               return 1.0 / std::max(child_num_distinct_values, static_cast<std::size_t>(1u));
             } else {
@@ -519,7 +520,7 @@ std::size_t StarSchemaSimpleCostModel::getNumDistinctValues(
       return stat.getNumDistinctValues(rel_attr_id);
     }
   }
-  return estimateCardinalityForTableReference(table_reference) * 0.5;
+  return estimateCardinalityForTableReference(table_reference) * 0.1;
 }
 
 bool StarSchemaSimpleCostModel::impliesUniqueAttributes(
