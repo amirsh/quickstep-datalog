@@ -82,10 +82,10 @@ add_library(quickstep_relationaloperators_SortRunGenerationOperator
             SortRunGenerationOperator.hpp)
 add_library(quickstep_relationaloperators_TableExportOperator TableExportOperator.cpp TableExportOperator.hpp)
 add_library(quickstep_relationaloperators_TableGeneratorOperator TableGeneratorOperator.cpp TableGeneratorOperator.hpp)
+add_library(quickstep_relationaloperators_TextScanOperator TextScanOperator.cpp TextScanOperator.hpp)
 add_library(quickstep_relationaloperators_TransitiveClosureOperator
             TransitiveClosureOperator.cpp
             TransitiveClosureOperator.hpp)
-add_library(quickstep_relationaloperators_TextScanOperator TextScanOperator.cpp TextScanOperator.hpp)
 add_library(quickstep_relationaloperators_UnionAllOperator UnionAllOperator.cpp UnionAllOperator.hpp)
 add_library(quickstep_relationaloperators_UpdateOperator UpdateOperator.cpp UpdateOperator.hpp)
 add_library(quickstep_relationaloperators_WindowAggregationOperator
@@ -580,10 +580,6 @@ target_link_libraries(quickstep_relationaloperators_TextScanOperator
                       quickstep_utility_Glob
                       quickstep_utility_Macros
                       tmb)
-if (QUICKSTEP_HAVE_FILE_MANAGER_HDFS)
-  target_link_libraries(quickstep_relationaloperators_TextScanOperator
-                        ${LIBHDFS3_LIBRARIES})
-endif(QUICKSTEP_HAVE_FILE_MANAGER_HDFS)
 target_link_libraries(quickstep_relationaloperators_TransitiveClosureOperator
                       glog
                       quickstep_catalog_CatalogRelation
@@ -697,6 +693,10 @@ target_link_libraries(quickstep_relationaloperators_WorkOrderFactory
 target_link_libraries(quickstep_relationaloperators_WorkOrder_proto
                       ${PROTOBUF_LIBRARY}
                       quickstep_relationaloperators_SortMergeRunOperator_proto)
+if (QUICKSTEP_HAVE_FILE_MANAGER_HDFS)
+  target_link_libraries(quickstep_relationaloperators_TextScanOperator
+                        ${LIBHDFS3_LIBRARIES})
+endif(QUICKSTEP_HAVE_FILE_MANAGER_HDFS)
 
 if(QUICKSTEP_HAVE_LIBNUMA)
   target_link_libraries(quickstep_relationaloperators_SelectOperator

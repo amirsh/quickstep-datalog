@@ -167,6 +167,7 @@ add_library(quickstep_utility_BarrieredReadWriteConcurrentBitVector
             BarrieredReadWriteConcurrentBitVector.hpp)
 add_library(quickstep_utility_BitManipulation ../empty_src.cpp BitManipulation.hpp)
 add_library(quickstep_utility_BitVector ../empty_src.cpp BitVector.hpp)
+add_library(quickstep_utility_BlockIDStream ../empty_src.cpp BlockIDStream.hpp)
 add_library(quickstep_utility_BloomFilter ../empty_src.cpp BloomFilter.hpp)
 add_library(quickstep_utility_BloomFilter_proto
             ${quickstep_utility_BloomFilter_proto_srcs}
@@ -177,10 +178,6 @@ add_library(quickstep_utility_Cast ../empty_src.cpp Cast.hpp)
 add_library(quickstep_utility_CheckSnprintf ../empty_src.cpp CheckSnprintf.hpp)
 add_library(quickstep_utility_ColumnVectorCache ../empty_src.cpp ColumnVectorCache.hpp)
 add_library(quickstep_utility_CompositeHash ../empty_src.cpp CompositeHash.hpp)
-add_library(quickstep_utility_BarrieredReadWriteConcurrentBitVector
-            ../empty_src.cpp
-            BarrieredReadWriteConcurrentBitVector.hpp)
-add_library(quickstep_utility_BlockIDStream ../empty_src.cpp BlockIDStream.hpp)
 add_library(quickstep_utility_DAG ../empty_src.cpp DAG.hpp)
 add_library(quickstep_utility_DisjointTreeForest ../empty_src.cpp DisjointTreeForest.hpp)
 add_library(quickstep_utility_EqualsAnyConstant ../empty_src.cpp EqualsAnyConstant.hpp)
@@ -212,6 +209,7 @@ add_library(quickstep_utility_SqlError SqlError.cpp SqlError.hpp)
 add_library(quickstep_utility_StringUtil StringUtil.cpp StringUtil.hpp)
 add_library(quickstep_utility_TemplateUtil ../empty_src.cpp TemplateUtil.hpp)
 add_library(quickstep_utility_ThreadSafeQueue ../empty_src.cpp ThreadSafeQueue.hpp)
+add_library(quickstep_utility_TransitiveClosureContext TransitiveClosureContext.cpp TransitiveClosureContext.hpp)
 add_library(quickstep_utility_TreeStringSerializable ../empty_src.cpp TreeStringSerializable.hpp)
 add_library(quickstep_utility_VectorUtil ../empty_src.cpp VectorUtil.hpp)
 
@@ -235,6 +233,11 @@ target_link_libraries(quickstep_utility_BitVector
                       glog
                       quickstep_utility_BitManipulation
                       quickstep_utility_Macros)
+target_link_libraries(quickstep_utility_BlockIDStream
+                      glog
+                      quickstep_catalog_CatalogRelation
+                      quickstep_storage_StorageBlockInfo
+                      quickstep_utility_Macros)
 target_link_libraries(quickstep_utility_BloomFilter
                       glog
                       quickstep_storage_StorageConstants
@@ -245,6 +248,9 @@ target_link_libraries(quickstep_utility_BloomFilter
                       quickstep_utility_Macros)
 target_link_libraries(quickstep_utility_BloomFilter_proto
                       ${PROTOBUF_LIBRARY})
+target_link_libraries(quickstep_utility_BulkIoConfiguration
+                      glog
+                      quickstep_utility_Macros)
 target_link_libraries(quickstep_utility_BulkIoConfiguration
                       glog
                       quickstep_utility_Macros)
@@ -260,15 +266,6 @@ target_link_libraries(quickstep_utility_CompositeHash
                       glog
                       quickstep_types_TypedValue
                       quickstep_utility_HashPair)
-target_link_libraries(quickstep_utility_BarrieredReadWriteConcurrentBitVector
-                      quickstep_utility_BitManipulation
-                      quickstep_utility_Macros)
-target_link_libraries(quickstep_utility_BlockIDStream
-                      quickstep_catalog_CatalogRelation
-                      quickstep_storage_StorageBlockInfo
-                      quickstep_utility_Macros)
-target_link_libraries(quickstep_utility_BulkIoConfiguration
-                      quickstep_utility_Macros)
 target_link_libraries(quickstep_utility_DAG
                       glog
                       quickstep_utility_Macros)
@@ -330,8 +327,8 @@ target_link_libraries(quickstep_utility_Range
                       glog
                       quickstep_utility_Macros)
 target_link_libraries(quickstep_utility_ScopedArray
-                      quickstep_utility_ScopedBuffer
-                      quickstep_utility_Macros)
+                      quickstep_utility_Macros
+                      quickstep_utility_ScopedBuffer)
 target_link_libraries(quickstep_utility_ScopedBuffer
                       glog
                       quickstep_utility_Alignment
@@ -420,6 +417,7 @@ target_link_libraries(quickstep_utility
                       quickstep_utility_TemplateUtil
                       quickstep_utility_TextBasedTestDriver
                       quickstep_utility_ThreadSafeQueue
+                      quickstep_utility_TransitiveClosureContext
                       quickstep_utility_TreeStringSerializable
                       quickstep_utility_VectorUtil)
 

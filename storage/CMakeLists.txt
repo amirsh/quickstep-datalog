@@ -953,6 +953,7 @@ target_link_libraries(quickstep_storage_ThreadPrivateCompactKeyHashTable
                       quickstep_utility_Macros
                       quickstep_utility_ScopedBuffer)
 target_link_libraries(quickstep_storage_TransitiveClosureState
+                      glog
                       quickstep_utility_BarrieredReadWriteConcurrentBitVector
                       quickstep_utility_Macros)
 target_link_libraries(quickstep_storage_TupleIdSequence
