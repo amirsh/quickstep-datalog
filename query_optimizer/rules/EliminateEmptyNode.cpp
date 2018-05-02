@@ -285,6 +285,7 @@ P::PhysicalPtr EliminateEmptyNode::apply(const P::PhysicalPtr &input) {
     case P::PhysicalType::kInsertTuple:
     case P::PhysicalType::kSharedSubplanReference:
     case P::PhysicalType::kTableGenerator:
+    case P::PhysicalType::kTransitiveClosure:
     case P::PhysicalType::kUpdateTable:
       // TODO(quickstep-team): revisit the cases above.
       return input;
