@@ -50,12 +50,14 @@ IGNORED_DEPENDENCIES = frozenset(
      "quickstep_cli_LineReaderLineNoise",
      "quickstep_cli_NetworkCli.grpc_proto",
      "quickstep_storage_DataExchange.grpc_proto",
-     "quickstep_threading_WinThreadsAPI",
-     "quickstep_utility_textbasedtest_TextBasedTest",
-     "quickstep_utility_textbasedtest_TextBasedTestDriver",
      "quickstep_storage_bitweaving_BitWeavingHIndexSubBlock",
      "quickstep_storage_bitweaving_BitWeavingIndexSubBlock",
-     "quickstep_storage_bitweaving_BitWeavingVIndexSubBlock"])
+     "quickstep_storage_bitweaving_BitWeavingVIndexSubBlock",
+     "quickstep_threading_WinThreadsAPI",
+     "quickstep_utility_ArrayIndex_proto",
+     "quickstep_utility_BitMatrix_proto",
+     "quickstep_utility_textbasedtest_TextBasedTest",
+     "quickstep_utility_textbasedtest_TextBasedTestDriver"])
 
 # States when scanning a CMakeLists.txt file.
 CMAKE_SCANNING_NONE = 0

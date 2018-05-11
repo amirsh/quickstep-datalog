@@ -26,9 +26,12 @@ import "storage/HashTable.proto";
 import "storage/InsertDestination.proto";
 import "storage/WindowAggregationOperationState.proto";
 import "types/containers/Tuple.proto";
+import "utility/ArrayIndex.proto";
+import "utility/BitMatrix.proto";
 import "utility/SortConfiguration.proto";
 import "utility/lip_filter/LIPFilter.proto";
 
+// Next tag: 18.
 message QueryContext {
   message AggregationOperationStateContext {
     required AggregationOperationState aggregation_state = 1;
@@ -54,7 +57,7 @@ message QueryContext {
     required int32 relation_id = 1;
     repeated UpdateAssignment update_assignments = 2;
   }
-  
+
   message TransitiveClosureState {
     required int32 range = 1;
   }
@@ -79,4 +82,7 @@ message QueryContext {
   required uint64 query_id = 14;
   repeated uint64 num_partitions_for_nested_loops_joins = 15;
   optional uint64 num_partitions_for_lips = 16 [default = 1];
+
+  repeated ArrayIndex array_indexes = 17;
+  repeated BitMatrix bit_matrices = 18;
 }
