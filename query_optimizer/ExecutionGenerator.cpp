@@ -181,6 +181,8 @@ static const volatile bool aggregate_hashtable_type_dummy
 
 DEFINE_bool(parallelize_load, true, "Parallelize loading data files.");
 
+DEFINE_bool(enable_compactkey_hashjoin_op, true, "Using compactkey seperate hash chaining.");
+
 static bool ValidateNumAggregationPartitions(const char *flagname, int value) {
   return value > 0;
 }
@@ -1930,17 +1932,20 @@ void ExecutionGenerator::convertAggregate(
       use_parallel_initialization = true;
     } else if (cost_model_for_aggregation_
                    ->canUseCompactKeySeparateChainingAggregation(physical_plan)) {
-      CHECK(aggregate_expressions.empty());
+      CHECK(aggregate_expressions.empty()); 
+      
       aggr_state_proto->set_hash_table_impl_type(
           serialization::HashTableImplType::COMPACT_KEY_SEPARATE_CHAINING);
       aggr_state_proto->set_estimated_num_entries(
           cost_model_for_aggregation_->estimateCardinality(physical_plan->input()));
       use_parallel_initialization = true;
+      
+      
     } else {
       const std::size_t estimated_num_groups =
           cost_model_for_aggregation_->estimateNumGroupsForAggregate(physical_plan);
       if (cost_model_for_aggregation_->canUseTwoPhaseCompactKeyAggregation(
-              physical_plan, estimated_num_groups)) {
+              physical_plan, estimated_num_groups) && FLAGS_enable_compactkey_hashjoin_op) {
         // Second option: use thread-private compact-key aggregation if applicable.
         aggr_state_proto->set_hash_table_impl_type(
             serialization::HashTableImplType::THREAD_PRIVATE_COMPACT_KEY);
@@ -1962,6 +1967,8 @@ void ExecutionGenerator::convertAggregate(
   }
   aggr_state_proto->set_is_partitioned(aggr_state_is_partitioned);
   aggr_state_proto->set_num_partitions(aggr_state_num_partitions);
+
+  std::cout<<"AggregationType: "<<aggr_state_proto->hash_table_impl_type()<<std::endl;
 
   if (physical_plan->filter_predicate() != nullptr) {
     unique_ptr<const Predicate> predicate(convertPredicate(physical_plan->filter_predicate()));
