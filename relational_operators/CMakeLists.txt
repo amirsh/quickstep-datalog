@@ -150,6 +150,7 @@ target_link_libraries(quickstep_relationaloperators_BitMatrixExportOperator
                       quickstep_utility_Range
                       tmb)
 target_link_libraries(quickstep_relationaloperators_BitMatrixJoinOperator
+                      ${GFLAGS_LIB_NAME}
                       glog
                       quickstep_cli_Flags
                       quickstep_queryexecution_QueryContext
