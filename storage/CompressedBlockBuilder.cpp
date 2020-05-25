@@ -281,7 +281,7 @@ void CompressedBlockBuilder::buildCompressedColumnStoreTupleStorageSubBlock(void
   DEBUG_ASSERT(tuple_size > 0);
   size_t max_tuples = (block_size_
                       - (sizeof(tuple_id) + sizeof(int)
-                         + compression_info_.ByteSize()
+                         + compression_info_.ByteSizeLong()
                          + total_dictionary_size
                          + null_bitmaps.size()
                            * BitVector<false>::BytesNeeded(compression_info_.null_bitmap_bits())))
@@ -433,7 +433,7 @@ bool CompressedBlockBuilder::addTupleInternal(Tuple *candidate_tuple) {
 
 std::size_t CompressedBlockBuilder::computeRequiredStorage(const std::size_t num_tuples) const {
   // Start with the size of the header.
-  size_t required_storage = compression_info_.ByteSize() + sizeof(int) + sizeof(tuple_id);
+  size_t required_storage = compression_info_.ByteSizeLong() + sizeof(int) + sizeof(tuple_id);
 
   // Add required storage attribute-by-attribute.
   size_t uncompressed_attributes_with_nulls = 0;
@@ -667,15 +667,15 @@ std::size_t CompressedBlockBuilder::buildTupleStorageSubBlockHeader(void *sub_bl
 
   // Serialize the compression info.
   *reinterpret_cast<int*>(static_cast<char*>(sub_block_memory) + sizeof(tuple_id))
-      = compression_info_.ByteSize();
+      = compression_info_.ByteSizeLong();
   if (!compression_info_.SerializeToArray(static_cast<char*>(sub_block_memory) + sizeof(tuple_id) + sizeof(int),
-                                          compression_info_.ByteSize())) {
+                                          compression_info_.ByteSizeLong())) {
     FATAL_ERROR("Failed to do binary serialization of CompressedBlockInfo in "
                 "CompressedBlockBuilder::buildTupleStorageSubBlockHeader");
   }
 
   // Build the physical dictionaries.
-  size_t memory_offset = sizeof(tuple_id) + sizeof(int) + compression_info_.ByteSize();
+  size_t memory_offset = sizeof(tuple_id) + sizeof(int) + compression_info_.ByteSizeLong();
   for (attribute_id attr_id = 0;
        attr_id <= relation_.getMaxAttributeId();
        ++attr_id) {
@@ -722,7 +722,7 @@ void CompressedBlockBuilder::buildNullBitmapMap(
   }
 
   char *memory_position = static_cast<char*>(sub_block_memory)
-                          + sizeof(int) + sizeof(tuple_id) + compression_info_.ByteSize();
+                          + sizeof(int) + sizeof(tuple_id) + compression_info_.ByteSizeLong();
 
   // Advance past all the dictionaries.
   for (attribute_id attr_id = 0;

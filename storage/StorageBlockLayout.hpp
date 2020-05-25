@@ -143,7 +143,7 @@ class StorageBlockLayout {
    **/
   std::size_t getBlockHeaderSize() const {
     DEBUG_ASSERT(block_header_.IsInitialized());
-    return sizeof(int) + block_header_.ByteSize();
+    return sizeof(int) + block_header_.ByteSizeLong();
   }
 
   /**

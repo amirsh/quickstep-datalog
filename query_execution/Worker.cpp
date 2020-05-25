@@ -100,7 +100,7 @@ void Worker::sendWorkOrderCompleteMessage(const tmb::client_id receiver,
                                           const WorkOrderCompletionMessage &proto,
                                           const message_type_id message_type) {
   // NOTE(zuyu): Using the heap memory to serialize proto as a c-like string.
-  const size_t proto_length = proto.ByteSize();
+  const size_t proto_length = proto.ByteSizeLong();
   char *proto_bytes = static_cast<char *>(std::malloc(proto_length));
   CHECK(proto.SerializeToArray(proto_bytes, proto_length));
 

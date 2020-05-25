@@ -262,7 +262,7 @@ class SortMergeRunOutput {
       msg.add_blocks(block);
     }
 
-    const std::size_t msg_size = msg.ByteSize();
+    const std::size_t msg_size = msg.ByteSizeLong();
     char *msg_bytes = static_cast<char *>(std::malloc(msg_size));
     CHECK(msg.SerializeToArray(msg_bytes, msg_size));
     return std::make_pair(msg_bytes, msg_size);

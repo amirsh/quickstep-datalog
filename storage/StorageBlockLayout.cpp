@@ -139,9 +139,9 @@ void StorageBlockLayout::copyHeaderTo(void *dest) const {
   DEBUG_ASSERT(DescriptionIsValid(relation_, layout_description_));
   DEBUG_ASSERT(block_header_.IsInitialized());
 
-  *static_cast<int*>(dest) = block_header_.ByteSize();
+  *static_cast<int*>(dest) = block_header_.ByteSizeLong();
   if (!block_header_.SerializeToArray(static_cast<char*>(dest) + sizeof(int),
-                                      block_header_.ByteSize())) {
+                                      block_header_.ByteSizeLong())) {
     FATAL_ERROR("Failed to do binary serialization of StorageBlockHeader in StorageBlockLayout::copyHeaderTo()");
   }
 }

@@ -1103,10 +1103,10 @@ std::unordered_map<attribute_id, TypedValue>* StorageBlock::generateUpdatedValue
 }
 
 void StorageBlock::updateHeader() {
-  DEBUG_ASSERT(*static_cast<const int*>(block_memory_) == block_header_.ByteSize());
+  DEBUG_ASSERT(*static_cast<const int*>(block_memory_) == block_header_.ByteSizeLong());
 
   if (!block_header_.SerializeToArray(static_cast<char*>(block_memory_) + sizeof(int),
-                                      block_header_.ByteSize())) {
+                                      block_header_.ByteSizeLong())) {
     FATAL_ERROR("Failed to do binary serialization of StorageBlockHeader in StorageBlock::updateHeader()");
   }
 }

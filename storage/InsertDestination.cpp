@@ -339,7 +339,7 @@ MutableBlockReference AlwaysCreateBlockInsertDestination::createNewBlock() {
   proto.set_block_id(new_id);
   proto.set_query_id(getQueryID());
 
-  const size_t proto_length = proto.ByteSize();
+  const size_t proto_length = proto.ByteSizeLong();
   char *proto_bytes = static_cast<char*>(malloc(proto_length));
   CHECK(proto.SerializeToArray(proto_bytes, proto_length));
 
@@ -388,7 +388,7 @@ MutableBlockReference BlockPoolInsertDestination::createNewBlock() {
   proto.set_block_id(new_id);
   proto.set_query_id(getQueryID());
 
-  const size_t proto_length = proto.ByteSize();
+  const size_t proto_length = proto.ByteSizeLong();
   char *proto_bytes = static_cast<char*>(malloc(proto_length));
   CHECK(proto.SerializeToArray(proto_bytes, proto_length));
 
@@ -509,7 +509,7 @@ MutableBlockReference PartitionAwareInsertDestination::createNewBlockInPartition
   proto.set_partition_id(part_id);
   proto.set_query_id(getQueryID());
 
-  const size_t proto_length = proto.ByteSize();
+  const size_t proto_length = proto.ByteSizeLong();
   char *proto_bytes = static_cast<char*>(malloc(proto_length));
   CHECK(proto.SerializeToArray(proto_bytes, proto_length));
 

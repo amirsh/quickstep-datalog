@@ -140,7 +140,7 @@ class CompressedBlockBuilder {
    *         by this CompressedBlockBuilder.
    **/
   inline std::size_t getMinimumRequiredBlockSize() const {
-    return sizeof(tuple_id) + sizeof(int) + compression_info_.ByteSize();
+    return sizeof(tuple_id) + sizeof(int) + compression_info_.ByteSizeLong();
   }
 
   /**
