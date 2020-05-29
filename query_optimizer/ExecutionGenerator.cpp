@@ -1968,7 +1968,7 @@ void ExecutionGenerator::convertAggregate(
   aggr_state_proto->set_is_partitioned(aggr_state_is_partitioned);
   aggr_state_proto->set_num_partitions(aggr_state_num_partitions);
 
-  std::cout<<"AggregationType: "<<aggr_state_proto->hash_table_impl_type()<<std::endl;
+  // std::cout<<"AggregationType: "<<aggr_state_proto->hash_table_impl_type()<<std::endl;
 
   if (physical_plan->filter_predicate() != nullptr) {
     unique_ptr<const Predicate> predicate(convertPredicate(physical_plan->filter_predicate()));
