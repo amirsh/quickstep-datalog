@@ -66,6 +66,7 @@ class GeneratorFunctionHandle {
    */
   virtual int getNumberOfOutputColumns() const = 0;
 
+  virtual ~GeneratorFunctionHandle() = default;
   /**
    * @brief Get the default name of the specified output column.
    *

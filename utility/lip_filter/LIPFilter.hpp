@@ -56,6 +56,8 @@ class LIPFilter {
     return type_;
   }
 
+  virtual ~LIPFilter() = default;
+
   /**
    * @brief Insert the values drawn from a ValueAccessor into this LIPFilter.
    *
